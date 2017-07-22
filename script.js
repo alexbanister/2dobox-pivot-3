@@ -3,8 +3,8 @@ $('.title-input, .body-input').keyup(disableSaveButton);
 $('.idea-card-parent').on('click', '#delete', deleteCard);
 $('.save-btn').on('click', saveNewCard);
 $('.search-input').on('keyup', searchCards);
-//var cardArray = []
-//var cardList = $('.idea-card-parent')
+$('.idea-card-parent').on('keydown', 'h2', updateCardInfo);
+$('.idea-card-parent').on('keydown', '.body-text', updateCardInfo);
 
 function setLocalStorage(array) {
   localStorage.setItem('array', JSON.stringify(array));
@@ -124,44 +124,29 @@ $('.idea-card-parent').on('click', '#downvote', function(event) {
 //   storeCards();
 // })
 // });
-                  
+
 function saveNewCard(e) {
   e.preventDefault();
   fireCards();
   disableSaveButton();
 }
 
-$('.idea-card-parent').on('keyup', 'h2', updateText);
-
-function updateText(e) {
-  if (event.keyCode === 13) {
+function updateCardInfo(e) {
+  if (e.keyCode == 13 && !e.shiftKey) {
     event.preventDefault();
     this.blur();
+    updateText(e);
   }
-  var id = $(this).closest('.idea-card')[0].id;
-  var title = $(this).text();
-  cardArray.forEach(function(card) {
-    if (card.id == id) {
-      card.title = title;
-    }
-  })
-  storeCards();
 }
 
-$('.idea-card-parent').on('keyup', '.body-text', function(event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    this.blur();
-  }
-  var id = $(this).closest('.idea-card')[0].id;
-  var body = $(this).text();
-  cardArray.forEach(function(card) {
-    if (card.id == id) {
-      card.body = body;
-    }
-  })
-  storeCards();
-});
+function updateText(e) {
+  var id = parseInt($(e.target).closest('.idea-card')[0].id);
+  var index = getIndex(id);
+  var cardArray = retrieveLocalStorage();
+  cardArray[index].title = $('#'+id).find('h2').text();
+  cardArray[index].body = $('#'+id).find('body-text').text();
+  setLocalStorage(cardArray);
+}
 
 function searchCards() {
   var search = $(this).val().toUpperCase();
@@ -198,7 +183,6 @@ function fireCards() {
   cardArray.push(newCard)
   addCards(newCard);
   setLocalStorage(cardArray);
-  //storeCards();
   clearInputs();
 };
 
