@@ -132,7 +132,7 @@ function saveNewCard(e) {
 }
 
 function updateCardInfo(e) {
-  if (event.keyCode == 13 && !event.shiftKey) {
+  if (e.keyCode == 13 && !e.shiftKey) {
     event.preventDefault();
     this.blur();
     updateText(e);
