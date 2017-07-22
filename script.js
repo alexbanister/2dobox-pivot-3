@@ -56,19 +56,24 @@ function getIndex(id) {
 }
 
 // UPVOTE AND DOWN BUTTONS THAT COMMUNITCATE CHANGE TO STORAGE
-$('.idea-card-parent').on('click', '#upvote', function(event) {
-  event.preventDefault();
-  var cardId = parseInt($(this).closest('.idea-card')[0].id);
+$('.idea-card-parent').on('click', '#upvote', changeQuality);
+
+function changeQuality(e) {
+  e.preventDefault();
+  var cardId = parseInt($(e.target).closest('.idea-card')[0].id);
+  var index = getIndex(cardId);
+  var cardArray = retrieveLocalStorage();
+  cardArray[index].quality++;
+  setLocalStorage(cardArray);
+  displayQuality(cardId, index);
+}
+
+function displayQuality(id, index) {
+  var cardArray = retrieveLocalStorage();
+  var quality = cardArray[index].quality;
   var status = ["swill", "plausible", "genius"];
-  cardArray.forEach(function(card) {
-      if (card.id === cardId) {
-      card.quality++;
-      console.log('status', status[card.quality]);
-      $('.new-quality').text(status[card.quality])
-    }
-    storeCards();
-    });
-});
+  $('.'+id).text(status[quality])
+}
 
 $('.idea-card-parent').on('click', '#downvote', function(event) {
   event.preventDefault();
