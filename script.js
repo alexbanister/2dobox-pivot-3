@@ -25,7 +25,7 @@ function CardElements(title, body) {
   this.title = title;
   this.body = body;
   this.id = Date.now();
-  this.quality = 'swill';
+  this.quality = 0;
 };
 
 function disableSaveButton() {
@@ -55,46 +55,76 @@ function getIndex(id) {
   return index;
 }
 
+// UPVOTE AND DOWN BUTTONS THAT COMMUNITCATE CHANGE TO STORAGE
 $('.idea-card-parent').on('click', '#upvote', function(event) {
   event.preventDefault();
-  var cardId = $(this).closest('.idea-card')[0].id
+  var cardId = parseInt($(this).closest('.idea-card')[0].id);
+  var status = ["swill", "plausible", "genius"];
   cardArray.forEach(function(card) {
-    if (card.id == cardId) {
-      if (card.quality === "swill") {
-        card.quality = "plausible";
-        $('.' + cardId).text('plausible')
-      } else if (card.quality === "plausible") {
-        card.quality = "genius"
-        $('.' + cardId).text('genius')
-      } else {
-        card.quality = "genius"
-        $('.' + cardId).text('genius')
-      }
+      if (card.id === cardId) {
+      card.quality++;
+      console.log('status', status[card.quality]);
+      $('.new-quality').text(status[card.quality])
     }
     storeCards();
-  })
+    });
 });
 
-$('.idea-card-parent').on('click', '#downvote', function (event){
+$('.idea-card-parent').on('click', '#downvote', function(event) {
   event.preventDefault();
-  var cardId = $(this).closest('.idea-card')[0].id
-  cardArray.forEach(function (card) {
-  if (card.id == cardId) {
-    if (card.quality === 'genius') {
-        card.quality = 'plausible';
-        $('.' + cardId).text('plausible')
-      } else if (card.quality === 'plausible') {
-        card.quality = 'swill'
-        $('.' + cardId).text('swill')
-      }else{
-        card.quality = 'swill'
-        $('.' + cardId).text('swill')
-      }
-  }
-  storeCards();
-})
+  var cardId = parseInt($(this).closest('.idea-card')[0].id);
+  var status = ["swill", "plausible", "genius"];
+  cardArray.forEach(function(card) {
+      if (card.id === cardId) {
+      card.quality--;
+      console.log('status', status[card.quality]);
+      $('.new-quality').text(status[card.quality])
+    }
+    storeCards();
+    });
 });
 
+// ORIGINAL UPVOTE AND DOWNVOTE BUTTONS
+// $('.idea-card-parent').on('click', '#upvote', function(event) {
+//   event.preventDefault();
+//   var cardId = $(this).closest('.idea-card')[0].id
+//   cardArray.forEach(function(card) {
+//     if (card.id == cardId) {
+//       if (card.quality === "swill") {
+//         card.quality = "plausible";
+//         $('.' + cardId).text('plausible')
+//       } else if (card.quality === "plausible") {
+//         card.quality = "genius"
+//         $('.' + cardId).text('genius')
+//       } else {
+//         card.quality = "genius"
+//         $('.' + cardId).text('genius')
+//       }
+//     }
+//     storeCards();
+//   })
+// });
+
+// $('.idea-card-parent').on('click', '#downvote', function (event){
+//   event.preventDefault();
+//   var cardId = $(this).closest('.idea-card')[0].id
+//   cardArray.forEach(function (card) {
+//   if (card.id == cardId) {
+//     if (card.quality === 'genius') {
+//         card.quality = 'plausible';
+//         $('.' + cardId).text('plausible')
+//       } else if (card.quality === 'plausible') {
+//         card.quality = 'swill'
+//         $('.' + cardId).text('swill')
+//       }else{
+//         card.quality = 'swill'
+//         $('.' + cardId).text('swill')
+//       }
+//   }
+//   storeCards();
+// })
+// });
+                  
 function saveNewCard(e) {
   e.preventDefault();
   fireCards();
@@ -133,8 +163,6 @@ $('.idea-card-parent').on('keyup', '.body-text', function(event) {
   storeCards();
 });
 
-
-
 function searchCards() {
   var search = $(this).val().toUpperCase();
   var results = cardArray.filter(function(elementCard) {
@@ -158,7 +186,7 @@ function addCards(buildCard) {
       <div class="ratings">
       <div class="upvote-btn" id="upvote"></div>
       <div class="downvote-btn" id="downvote"></div>
-        <p class="quality">quality: <span class="${buildCard.id}">${buildCard.quality}</span></p>
+        <p class="quality">quality: <span class="${buildCard.id} new-quality">${buildCard.quality}</span></p>
       </div>
       <hr>
     </article>`);
@@ -173,8 +201,6 @@ function fireCards() {
   //storeCards();
   clearInputs();
 };
-
-
 
 function clearInputs() {
   $('.title-input').val('');
