@@ -15,8 +15,6 @@ h1 {
   font-size: 3em;
   padding-top: .75em;
   margin-bottom: .75em;
-}
-.to {
   color: #00a79d;
 }
 .do {
@@ -34,7 +32,6 @@ h1 {
   padding: .1em 0 .1em .25em;
   font-size: 1.75em;
   color: #6d6e71;
-
 }
 
 .save-btn {
@@ -108,14 +105,14 @@ h2 {
 .task-text {
   color: #939598;
 }
-.quality {
+.importance {
   color: #6d6e71;
   margin-left: 1.2em;
   display: inline-block;
   font-family: 'roboto slab', sans-serif;
   letter-spacing: .04em;
 }
-.todo-card {
+.card {
   width: 66%;
   margin: auto;
 }
@@ -128,44 +125,42 @@ hr {
   color: #d1d3d4;
   margin-top: .75em;
 }
-.upvote-btn, .downvote-btn, .quality-div, .quality {
+.upvote-btn, .downvote-btn, .importance {
   display: inline-block;
 }
-.quality-div {
-  margin: 0 0 .25em .75em;
-}
+
 .delete-btn {
   height: 1.5em;
   width: 1.5em;
   float: right;
   display: inline-block;
-  background-image: url(ideabox-assets/delete.svg);
+  background-image: url(images/delete.svg);
 }
 #delete, #upvote, #downvote {
   height: 1.5em;
   width: 1.5em;
 }
 #delete:hover {
-  background-image: url(ideabox-assets/delete-hover.svg);
+  background-image: url(images/delete-hover.svg);
 }
 #upvote {
   height: 1.5em;
   width: 1.5em;
   display: inline-block;
-  background-image: url(ideabox-assets/upvote.svg);
+  background-image: url(images/upvote.svg);
 }
 #upvote:hover {
-  background-image: url(ideabox-assets/upvote-hover.svg);
+  background-image: url(images/upvote-hover.svg);
 }
 #downvote {
   margin-left: .75em;
   height: 1.5em;
   width: 1.5em;
   display: inline-block;
-  background-image: url(ideabox-assets/downvote.svg);
+  background-image: url(images/downvote.svg);
 }
 #downvote:hover {
-  background-image: url(ideabox-assets/downvote-hover.svg);
+  background-image: url(images/downvote-hover.svg);
 }
 
 #card-template {
