@@ -5,6 +5,7 @@ $('.save-btn').on('click', saveNewCard);
 $('.search-input').on('keyup', searchCards);
 $('.idea-card-parent').on('keydown', 'h2', updateCardInfo);
 $('.idea-card-parent').on('keydown', '.body-text', updateCardInfo);
+$('.idea-card-parent').on('click', '.ratings', changeImportance);
 
 function setLocalStorage(array) {
   localStorage.setItem('array', JSON.stringify(array));
@@ -37,14 +38,14 @@ function disableSaveButton() {
 }
 
 function deleteCard() {
-  var currentCardId = parseInt($(this).closest('.idea-card')[0].id);
+  var currentCardId = parseInt($(this).closest('.todo-card')[0].id);
   var index = getIndex(currentCardId);
   var cardArray = retrieveLocalStorage();
   if (index >= 0) {
     cardArray.splice(index, 1);
   }
   setLocalStorage(cardArray);
-  $(this).parents('.idea-card').remove();
+  $(this).parents('.todo-card').remove();
 }
 
 function getIndex(id) {
@@ -55,33 +56,34 @@ function getIndex(id) {
   return index;
 }
 
-// UPVOTE AND DOWN BUTTONS THAT COMMUNITCATE CHANGE TO STORAGE
-$('.idea-card-parent').on('click', '.ratings', changeQuality);
-
-function changeQuality(e) {
-  e.preventDefault();
-  var cardId = parseInt($(e.target).closest('.idea-card')[0].id);
+function changeImportance(e) {
+  var cardId = parseInt($(e.target).closest('.todo-card')[0].id);
   var index = getIndex(cardId);
   var cardArray = retrieveLocalStorage();
-  if ($(e.target).attr('id') === 'upvote') {
-    var i = 1;
-  } else {
-    var i = -1;
-  }
-  var newVal = cardArray[index].quality;
-  newVal = newVal + i;
-  if (newVal >= 0 && newVal <= 2) {
-    cardArray[index].quality += i;
-  }
+  cardArray[index].quality += validateChange(e, cardArray[index].quality);
   setLocalStorage(cardArray);
-  displayQuality(cardId, index);
+  displayImportance(cardId, index);
 }
 
-function displayQuality(id, index) {
+function validateChange(e, currentVal) {
+  var increment = ($(e.target).attr('id') === 'upvote') ? 1 : -1;
+  var newVal = increment + currentVal;
+  if (newVal >= 0 && newVal < getImportanceLevels().length) {
+    return increment;
+  } else {
+    return 0;
+  }
+}
+
+function getImportanceLevels(){
+  return ["None", "Low", "Normal", "High", "Critical"]
+}
+
+function displayImportance(id, index) {
   var cardArray = retrieveLocalStorage();
-  var quality = cardArray[index].quality;
-  var status = ["swill", "plausible", "genius"];
-  $('#'+id).find('.card-quality').text(status[quality]);
+  var importance = cardArray[index].quality;
+  var importanceText = getImportanceLevels();
+  $('#'+id).find('.new-quality').text(importanceText[importance]);
 }
 
 function saveNewCard(e) {
@@ -99,7 +101,7 @@ function updateCardInfo(e) {
 }
 
 function updateText(e) {
-  var id = parseInt($(e.target).closest('.idea-card')[0].id);
+  var id = parseInt($(e.target).closest('.todo-card')[0].id);
   var index = getIndex(id);
   var cardArray = retrieveLocalStorage();
   cardArray[index].title = $('#'+id).find('h2').text();
@@ -125,19 +127,20 @@ function addCards(buildCard) {
   template.find('h2').text(buildCard.title);
   template.find('.body-text').text(buildCard.body);
   $('.idea-card-parent').prepend(template);
+  displayImportance(buildCard.id, getIndex(buildCard.id));
 };
 
 function fireCards() {
   var newCard = new CardElements($('.title-input').val(), $('.body-input').val());
   var cardArray = retrieveLocalStorage();
   cardArray.push(newCard)
-  addCards(newCard);
   setLocalStorage(cardArray);
+  addCards(newCard);
   clearInputs();
 };
 
 function clearInputs() {
   $('.title-input').val('');
   $('.body-input').val('');
-  $('title-input').focus();
+  $('.title-input').focus();
 };
