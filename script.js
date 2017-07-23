@@ -56,14 +56,27 @@ function getIndex(id) {
 }
 
 // UPVOTE AND DOWN BUTTONS THAT COMMUNITCATE CHANGE TO STORAGE
-$('.idea-card-parent').on('click', '#upvote', changeQuality);
+$('.idea-card-parent').on('click', '.ratings', changeQuality);
 
 function changeQuality(e) {
   e.preventDefault();
   var cardId = parseInt($(e.target).closest('.idea-card')[0].id);
   var index = getIndex(cardId);
   var cardArray = retrieveLocalStorage();
-  cardArray[index].quality++;
+  if ($(e.target).attr('id') === 'upvote') {
+    // cardArray[index].quality++;
+    var i = 1;
+  } else {
+    // cardArray[index].quality--;
+    var i = -1;
+  }
+  var newVal = cardArray[index].quality;
+  newVal = newVal + i;
+  if (newVal >= 0 && newVal <= 2) {
+    cardArray[index].quality += i;
+  }
+  console.log('button: ', $(e.target).attr('id'));
+  console.log('status counter: ', cardArray[index].quality);
   setLocalStorage(cardArray);
   displayQuality(cardId, index);
 }
@@ -72,22 +85,35 @@ function displayQuality(id, index) {
   var cardArray = retrieveLocalStorage();
   var quality = cardArray[index].quality;
   var status = ["swill", "plausible", "genius"];
-  $('.'+id).text(status[quality])
+  $('#'+id).find('.card-quality').text(status[quality]);
 }
 
-$('.idea-card-parent').on('click', '#downvote', function(event) {
-  event.preventDefault();
-  var cardId = parseInt($(this).closest('.idea-card')[0].id);
-  var status = ["swill", "plausible", "genius"];
-  cardArray.forEach(function(card) {
-      if (card.id === cardId) {
-      card.quality--;
-      console.log('status', status[card.quality]);
-      $('.new-quality').text(status[card.quality])
-    }
-    storeCards();
-    });
-});
+// $('.idea-card-parent').on('click', '#downvote', changeQuality);
+//
+// function changeQuality(e) {
+//   e.preventDefault();
+//   var cardId = parseInt($(e.target).closest('.idea-card')[0].id);
+//   var index = getIndex(cardId);
+//   var cardArray = retrieveLocalStorage();
+//
+//   setLocalStorage(cardArray);
+//   displayQuality(cardId, index);
+// }
+
+
+//Refactored delete button #1
+// $('.idea-card-parent').on('click', '#downvote', function(event) {
+//   event.preventDefault();
+//   var cardId = parseInt($(this).closest('.idea-card')[0].id);
+//   var status = ["swill", "plausible", "genius"];
+//   cardArray.forEach(function(card) {
+//       if (card.id === cardId) {
+//       card.quality--;
+//       $('.new-quality').text(status[card.quality])
+//     }
+//     storeCards();
+//     });
+// });
 
 // ORIGINAL UPVOTE AND DOWNVOTE BUTTONS
 // $('.idea-card-parent').on('click', '#upvote', function(event) {
@@ -176,7 +202,7 @@ function addCards(buildCard) {
       <div class="ratings">
       <div class="upvote-btn" id="upvote"></div>
       <div class="downvote-btn" id="downvote"></div>
-        <p class="quality">quality: <span class="${buildCard.id} new-quality">${buildCard.quality}</span></p>
+        <p class="quality">quality: <span class="card-quality">${buildCard.quality}</span></p>
       </div>
       <hr>
     </article>`);
