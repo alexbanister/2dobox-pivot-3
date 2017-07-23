@@ -154,11 +154,10 @@ function updateText(e) {
 }
 
 function searchCards() {
-  var search = $(this).val().toUpperCase();
+  var cardArray = retrieveLocalStorage();
   var results = cardArray.filter(function(elementCard) {
-    return elementCard.title.toUpperCase().includes(search) ||
-           elementCard.body.toUpperCase().includes(search) ||
-           elementCard.quality.toUpperCase().includes(search);
+    return elementCard.title.toUpperCase().includes($('.search-input').val().toUpperCase()) ||
+           elementCard.body.toUpperCase().includes($('.search-input').val().toUpperCase());
   });
   $('.idea-card-parent').empty();
   for (var i = 0; i < results.length; i++) {
@@ -167,19 +166,11 @@ function searchCards() {
 };
 
 function addCards(buildCard) {
-  $('.idea-card-parent').prepend(
-    `<article class="idea-card" id="${buildCard.id}">
-      <h2 contenteditable="true">${buildCard.title}</h2>
-      <div class="delete-btn" id="delete">
-      </div>
-      <p class="body-text" contenteditable="true">${buildCard.body}</p>
-      <div class="ratings">
-      <div class="upvote-btn" id="upvote"></div>
-      <div class="downvote-btn" id="downvote"></div>
-        <p class="quality">quality: <span class="${buildCard.id} new-quality">${buildCard.quality}</span></p>
-      </div>
-      <hr>
-    </article>`);
+  var template = $('#card-template').clone();
+  template.attr('id', buildCard.id);
+  template.find('h2').text(buildCard.title);
+  template.find('.body-text').text(buildCard.body);
+  $('.idea-card-parent').prepend(template);
 };
 
 function fireCards() {

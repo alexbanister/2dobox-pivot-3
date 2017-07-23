@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
+
     <section class="top-section">
       <header>
         <h1><span class="idea">idea</span><span class="box">box</span></h1>
@@ -22,12 +23,32 @@
         <input class="save-btn" type="submit" value="save" disabled />
       </form>
     </section>
+
     <section class="search-section">
       <input class="search-input" type="text" placeholder="Search">
     </section>
+
     <section class="idea-card-parent">
       <article class="idea-card">
       </article>
+    </section>
+
+    <!-- <script id="card-template" type="text/x-jQuery-tmpl"> -->
+    <!-- <template> -->
+      <article class="idea-card" id="card-template">
+        <h2 contenteditable="true">${title}</h2>
+        <div class="delete-btn" id="delete"></div>
+        <p class="body-text" contenteditable="true">${body}</p>
+        <div class="ratings">
+          <div class="upvote-btn" id="upvote"></div>
+          <div class="downvote-btn" id="downvote"></div>
+          <p class="quality">quality: <span class="new-quality">swill</span></p>
+        </div>
+        <hr>
+      </article>
+    <!-- </template> -->
+    <!-- </script> -->
+
     <script type="text/javascript" src="script.js" type="text/js"></script>
   </body>
 </html>
