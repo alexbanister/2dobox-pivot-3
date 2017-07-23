@@ -6,49 +6,43 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="path/to/your/jquery.min.js"><\/script>')</script>
-    <title>Francy and Ben Idea Box</title>
+    <title>ToDo Box</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
 
     <section class="top-section">
       <header>
-        <h1><span class="idea">idea</span><span class="box">box</span></h1>
+        <h1>To<span class="do">Do</span></h1>
       </header>
       <form class="input-fields">
         <input class="title-input" type="text" placeholder="Title" />
-        <input class="body-input" type="text" placeholder="Body" />
+        <input class="task-input" type="text" placeholder="Task" />
         <input class="save-btn" type="submit" value="save" disabled />
       </form>
     </section>
 
-    <section class="search-section">
-      <input class="search-input" type="text" placeholder="Search">
+    <section class="filter-section">
+      <input class="filter-input" type="text" placeholder="Filter">
     </section>
 
-    <section class="idea-card-parent">
-      <article class="idea-card">
-      </article>
+    <section class="card-parent">
+
     </section>
 
-    <!-- <script id="card-template" type="text/x-jQuery-tmpl"> -->
-    <!-- <template> -->
-      <article class="todo-card" id="card-template">
-        <h2 contenteditable="true">${title}</h2>
+      <article class="card" id="card-template">
+        <h2 contenteditable="true"></h2>
         <div class="delete-btn" id="delete"></div>
-        <p class="body-text" contenteditable="true">${body}</p>
+        <p class="task-text" contenteditable="true"></p>
         <div class="ratings">
           <div class="upvote-btn" id="upvote"></div>
           <div class="downvote-btn" id="downvote"></div>
-          <p class="quality">quality: <span class="new-quality">swill</span></p>
+          <p class="importance">Importance: <span class="new-importance"></span></p>
         </div>
         <hr>
       </article>
-    <!-- </template> -->
-    <!-- </script> -->
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="script.js" type="text/js"></script>
   </body>
 </html>
