@@ -15,30 +15,30 @@
 
     <section class="top-section">
       <header>
-        <h1><span class="idea">idea</span><span class="box">box</span></h1>
+        <h1><span class="to">To</span><span class="do">Do</span></h1>
       </header>
       <form class="input-fields">
         <input class="title-input" type="text" placeholder="Title" />
-        <input class="body-input" type="text" placeholder="Body" />
+        <input class="task-input" type="text" placeholder="Task" />
         <input class="save-btn" type="submit" value="save" disabled />
       </form>
     </section>
 
-    <section class="search-section">
-      <input class="search-input" type="text" placeholder="Search">
+    <section class="filter-section">
+      <input class="filter-input" type="text" placeholder="Filter">
     </section>
 
-    <section class="idea-card-parent">
-      <article class="idea-card">
+    <section class="todp-card-parent">
+      <article class="todo-card">
       </article>
     </section>
 
     <!-- <script id="card-template" type="text/x-jQuery-tmpl"> -->
     <!-- <template> -->
-      <article class="idea-card" id="card-template">
+      <article class="todo-card" id="card-template">
         <h2 contenteditable="true">${title}</h2>
         <div class="delete-btn" id="delete"></div>
-        <p class="body-text" contenteditable="true">${body}</p>
+        <p class="task-text" contenteditable="true">${task}</p>
         <div class="ratings">
           <div class="upvote-btn" id="upvote"></div>
           <div class="downvote-btn" id="downvote"></div>
