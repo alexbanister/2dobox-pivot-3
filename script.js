@@ -5,7 +5,7 @@ $('.save-btn').on('click', saveNewCard);
 $('.search-input').on('keyup', searchCards);
 $('.idea-card-parent').on('keydown', 'h2', updateCardInfo);
 $('.idea-card-parent').on('keydown', '.body-text', updateCardInfo);
-$('.idea-card-parent').on('click', '.ratings', changeImportance);
+$('.todo-card-parent').on('click', '.ratings', changeImportance);
 
 function setLocalStorage(array) {
   localStorage.setItem('array', JSON.stringify(array));
