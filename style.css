@@ -146,8 +146,10 @@ h2 {
 .complete-btn:hover {
   background-color: #939598;
 }
-
 .complete-task {
+  opacity: .7;
+}
+.complete-task h2, .complete-task p {
   text-decoration: line-through;
 }
 

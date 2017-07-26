@@ -5,17 +5,50 @@ $('.save-btn').on('click', saveNewCard);
 $('.search-input').on('keyup', searchCards);
 $('.card-parent').on('keydown', 'h2', updateCardInfo);
 $('.card-parent').on('keydown', '.task-text', updateCardInfo);
-$('.card-parent').on('click', '.ratings', changeImportance);
 $('.card-parent').on('click', '.complete-btn', taskComplete)
-$('.card-parent').on('click', '.filter-complete-btn', filterCompleteCards)
+$('.card-parent').on('click', '#downvote', changeImportance);
+$('.card-parent').on('click', '#upvote', changeImportance);
+$('.filter-complete-btn').on('click', showCompleteCards)
 $('.loadAll-section').on('click', displayAllCards);
 $('#filter').on('change', filterCards);
 $('.clear-button').on('click', clearFilter);
 
-function taskComplete() {
-  var selectedCardId = parseInt($(this).closest('.card')[0].id);
-  console.log('this: ', $('#' + selectedCardId).find('.card, h2, .task-text'));
-  $('#' + selectedCardId).find('.card, h2, .task-text').toggleClass('complete-task')
+function taskComplete(e) {
+  var cardId = parseInt($(e.target).closest('.card')[0].id);
+  var index = getIndex(cardId);
+  var cardArray = retrieveLocalStorage();
+  if (cardArray[index].isComplete === true) {
+    cardArray[index].isComplete = false;
+  } else {
+    cardArray[index].isComplete = true;
+  }
+  setLocalStorage(cardArray);
+  taskCompleteUpdateDOM(cardId);
+}
+
+function taskCompleteUpdateDOM(id) {
+  $('#' + id).toggleClass('complete-task');
+}
+
+function showCompleteCards() {
+  $('.loadAll-section').hide();
+  $('.card-parent').empty();
+  getCompletedCards().forEach(function(card) {
+    addCards(card);
+    taskCompleteUpdateDOM(card.id)
+  })
+};
+
+function getCompletedCards() {
+  return retrieveLocalStorage().filter(function(card){
+    return card.isComplete === true;
+  });
+}
+
+function filterFromLocalStorage() {
+  return retrieveLocalStorage().filter(function(card){
+    return card.isComplete === false;
+  });
 }
 
 function setLocalStorage(array) {
@@ -29,18 +62,20 @@ function retrieveLocalStorage() {
 function displayAllCards() {
   $('.loadAll-section').hide();
   $('.card-parent').empty();
-  var cardArray = retrieveLocalStorage();
-  cardArray.forEach(function(card) {
+  filterFromLocalStorage().forEach(function(card) {
     addCards(card);
-  })
+  });
+  // var displayCards = filterFromLocalStorage().slice(-10);
+  // displayCards.forEach(function(card) {
+  //   addCards(card);
+  // })
 };
 
 function displayFirstCards() {
   $('.card-parent').empty();
-  var cardArray = retrieveLocalStorage().slice(-10);
-  cardArray.forEach(function(card) {
+  filterFromLocalStorage().slice(-10).forEach(function(card) {
     addCards(card);
-  })
+  });
 }
 
 function CardElements(title, task) {
@@ -48,6 +83,7 @@ function CardElements(title, task) {
   this.task = task;
   this.id = Date.now();
   this.importance = 2;
+  this.isComplete = false;
 };
 
 function disableSaveButton() {
@@ -131,7 +167,7 @@ function updateText(e) {
 }
 
 function searchCards() {
-  var cardArray = retrieveLocalStorage();
+  var cardArray = filterFromLocalStorage();
   var results = cardArray.filter(function(elementCard) {
     return elementCard.title.toUpperCase().includes($('.search-input').val().toUpperCase()) ||
            elementCard.task.toUpperCase().includes($('.search-input').val().toUpperCase());
@@ -142,17 +178,10 @@ function searchCards() {
   }
 };
 
-function filterCompleteCards() {
-  // var cardArray = retrieveLocalStorage();
-  // var completed = cardArray.filter(function(cardsMarkedComplete) {
-  //     return cardsMarkedComplete.
-  // });
-};
-
 function filterCards() {
   $('.clear-button').show();
   $('.loadAll-section').hide();
-  var cardArray = retrieveLocalStorage();
+  var cardArray = filterFromLocalStorage();
   var results = cardArray.filter(function(elementCard) {
     return elementCard.importance === parseInt($('#filter').val());
   });
