@@ -6,6 +6,15 @@ $('.filter-input').on('keyup', filterCards);
 $('.card-parent').on('keydown', 'h2', updateCardInfo);
 $('.card-parent').on('keydown', '.task-text', updateCardInfo);
 $('.card-parent').on('click', '.ratings', changeImportance);
+$('.card-parent').on('click', '.complete-btn', taskComplete)
+$('.card-parent').on('click', '.filter-complete-btn', filterCompleteCards)
+
+
+function taskComplete() {
+  var selectedCardId = parseInt($(this).closest('.card')[0].id);
+  console.log('this: ', $('#' + selectedCardId).find('.card, h2, .task-text'));
+  $('#' + selectedCardId).find('.card, h2, .task-text').toggleClass('complete-task')
+}
 
 function setLocalStorage(array) {
   localStorage.setItem('array', JSON.stringify(array));
@@ -20,7 +29,7 @@ function displayAllCards() {
   cardArray.forEach(function(card) {
     addCards(card);
   })
-}
+};
 
 function CardElements(title, task) {
   this.title = title;
@@ -121,6 +130,13 @@ function filterCards() {
     addCards(results[i]);
   }
 };
+
+// function filterCompleteCards() {
+//   var cardArray = retrieveLocalStorage();
+//   var completed = cardArray.filter(function(cardsMarkedComplete) {
+//       return cardsMarkedComplete.
+//   });
+// };
 
 function addCards(buildCard) {
   var template = $('#card-template').clone();

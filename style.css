@@ -20,7 +20,7 @@ h1 {
 .do {
   color: #6d6e71;
 }
-.title-input, .task-input, .save-btn, .filter-input {
+.title-input, .task-input, .save-btn, .filter-input, .filter-complete-btn {
   width: 66%;
   display: block;
   margin: auto;
@@ -34,7 +34,7 @@ h1 {
   color: #6d6e71;
 }
 
-.save-btn {
+.save-btn, .filter-complete-btn {
   height: 2.5em;
   font-size: 1.25em;
 }
@@ -67,7 +67,7 @@ h1 {
   outline-style: auto;
   outline-color: #00a79d;
 }
-.save-btn:focus {
+.save-btn:focus, .filter-complete-btn:focus {
   outline-style: auto;
   outline-color: #00a79d;
 }
@@ -75,17 +75,17 @@ h1 {
   outline-style: auto;
   outline-color: #00a79d;
 }
-.save-btn {
+.save-btn, .filter-complete-btn {
   background-color: #00a79d;
   color: #ffffff;
   font-size: 1em;
   border: none;
 }
-.save-btn:hover {
+.save-btn:hover, .filter-complete-btn:hover {
   background-color: #045e55;
 }
 
-.save-btn:disabled {
+.save-btn:disabled, .filter-complete-btn:disabled {
   background-color: #d1d3d4;
 }
 .input-fields {
@@ -112,6 +112,22 @@ h2 {
   font-family: 'roboto slab', sans-serif;
   letter-spacing: .04em;
 }
+
+.complete-btn {
+  border: none;
+  margin-left: auto;
+  color: #d1d3d4;
+  background-color: #045e55;
+}
+
+.complete-btn:hover {
+  background-color: #939598;
+}
+
+.complete-task {
+  text-decoration: line-through;
+}
+
 .card {
   width: 66%;
   margin: auto;
@@ -178,7 +194,7 @@ h2, .ratings, .task-text {
     padding-top: 0;
     padding-bottom: 4em;
   }
-  .title-input, .task-input, .save-btn, .filter-input {
+  .title-input, .task-input, .save-btn, .filter-input, .filter-complete-btn {
     width: 80%;
     margin-left: auto;
   }
