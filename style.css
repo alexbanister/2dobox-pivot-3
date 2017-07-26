@@ -1,12 +1,13 @@
 body {
   font-family: 'open sans', sans-serif;
   font-weight: 400;
+  background-color: #f2efbd;
 }
 p {
   line-height: 140%;
 }
 .top-section {
-  background-color: #e5f3f2;
+  background-color: #1b1e26;
 }
 h1 {
   font-family: 'roboto slab', sans-serif;
@@ -15,15 +16,13 @@ h1 {
   font-size: 3em;
   padding-top: .75em;
   margin-bottom: .75em;
-  color: #00a79d;
+  color: #2f6d7a;
 }
 .do {
-  color: #6d6e71;
+  color: #b6d051;
 }
 
-//.title-input, .task-input, .save-btn, .search-input, .filter-section {//
-
-.loadAll-section, .title-input, .task-input, .save-btn, .filter-input {
+.filter-section, .loadAll-section, .title-input, .task-input, .save-btn, .search-input {
   width: 66%;
   display: block;
   margin: auto;
@@ -35,7 +34,7 @@ h1 {
   padding: .5em;
   color: #ffffff;
   margin: 1em 0;
-  background-color: #00a79d;
+  background-color: #2f6d7a;
 }
 
 .filter-section {
@@ -43,10 +42,10 @@ h1 {
 }
 
 .search-input, .title-input, .task-input {
-  border: 4px solid #d1d3d4;
+  border: 4px solid #999999;
   padding: .1em 0 .1em .25em;
   font-size: 1.75em;
-  color: #6d6e71;
+  color: #2f343b;
 }
 
 .save-btn {
@@ -58,7 +57,7 @@ h1 {
   color: #ffffff;
   margin: 1em 0;
   text-align: center;
-  background-color: #00a79d;
+  background-color: #2f6d7a;
 }
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
@@ -80,34 +79,22 @@ h1 {
   font-size: .5em;
 }
 
-.title-input:focus {
+.search-input:focus, .save-btn:focus, .task-input:focus, .title-input:focus {
   outline-style: auto;
-  outline-color: #00a79d;
-}
-.task-input:focus {
-  outline-style: auto;
-  outline-color: #00a79d;
-}
-.save-btn:focus {
-  outline-style: auto;
-  outline-color: #00a79d;
-}
-.search-input:focus {
-  outline-style: auto;
-  outline-color: #00a79d;
+  outline-color: #b6d051;
 }
 .save-btn {
-  background-color: #00a79d;
+  background-color: #2f6d7a;
   color: #ffffff;
   font-size: 1em;
   border: none;
 }
-.save-btn:hover {
-  background-color: #045e55;
+.save-btn:hover, .clear-button:hover, .load-button:hover {
+  background-color: #b6d051;
 }
 
 .save-btn:disabled {
-  background-color: #d1d3d4;
+  background-color: #999999;
 }
 .input-fields {
   padding-bottom: 1em;
@@ -118,7 +105,7 @@ h1 {
 }
 
 h2 {
-  color: #6d6e71;
+  color: #2f343b;
 }
 .task {
   text-align: left;
@@ -127,7 +114,7 @@ h2 {
   color: #939598;
 }
 .importance {
-  color: #6d6e71;
+  color: #2f343b;
   margin-left: 1.2em;
   display: inline-block;
   font-family: 'roboto slab', sans-serif;
@@ -201,7 +188,7 @@ h2, .ratings, .task-text {
     padding-top: 0;
     padding-bottom: 4em;
   }
-  .title-input, .task-input, .save-btn, .search-input {
+  .card, .filter-section, .loadAll-section, .title-input, .task-input, .save-btn, .search-input {
     width: 80%;
     margin-left: auto;
   }
