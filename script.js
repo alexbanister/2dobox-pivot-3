@@ -1,4 +1,4 @@
-$(document).ready(displayAllCards);
+$(document).ready(displayFirstCards);
 $('.title-input, .task-input').keyup(disableSaveButton);
 $('.card-parent').on('click', '#delete', deleteCard);
 $('.save-btn').on('click', saveNewCard);
@@ -16,7 +16,16 @@ function retrieveLocalStorage() {
 };
 
 function displayAllCards() {
+  $('.card-parent').empty();
   var cardArray = retrieveLocalStorage();
+  cardArray.forEach(function(card) {
+    addCards(card);
+  })
+}
+
+function displayFirstCards() {
+  $('.card-parent').empty();
+  var cardArray = retrieveLocalStorage().slice(-10);
   cardArray.forEach(function(card) {
     addCards(card);
   })
