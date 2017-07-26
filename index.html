@@ -26,9 +26,8 @@
       <input class="search-input" type="text" placeholder="Search">
     </section>
     <section class="filter-section">
-      <input class="filter-complete-btn" type="submit" value="show completed todos" disabled />
       <form>
-        <label for="filter">Filter Importance: </label>
+        <label for="filter">Filter Importance:
         <select id="filter">
           <option value=""></option>
           <option value="0">None</option>
@@ -37,7 +36,9 @@
           <option value="3">High</option>
           <option value="4">Critical</option>
         </select>
-        <p class="clear-button">Clear Filter</p>
+        </label>
+        <input class="clear-button" type="submit" value="Clear Filter" />
+        <input class="filter-complete-btn" type="submit" value="show completed todos" />
       </form>
     </section>
 

@@ -133,8 +133,8 @@ function updateText(e) {
 function searchCards() {
   var cardArray = retrieveLocalStorage();
   var results = cardArray.filter(function(elementCard) {
-    return elementCard.title.toUpperCase().includes($('.filter-input').val().toUpperCase()) ||
-           elementCard.task.toUpperCase().includes($('.filter-input').val().toUpperCase());
+    return elementCard.title.toUpperCase().includes($('.search-input').val().toUpperCase()) ||
+           elementCard.task.toUpperCase().includes($('.search-input').val().toUpperCase());
   });
   $('.card-parent').empty();
   for (var i = 0; i < results.length; i++) {
@@ -142,15 +142,16 @@ function searchCards() {
   }
 };
 
-// function filterCompleteCards() {
-//   var cardArray = retrieveLocalStorage();
-//   var completed = cardArray.filter(function(cardsMarkedComplete) {
-//       return cardsMarkedComplete.
-//   });
-// };
+function filterCompleteCards() {
+  // var cardArray = retrieveLocalStorage();
+  // var completed = cardArray.filter(function(cardsMarkedComplete) {
+  //     return cardsMarkedComplete.
+  // });
+};
 
 function filterCards() {
   $('.clear-button').show();
+  $('.loadAll-section').hide();
   var cardArray = retrieveLocalStorage();
   var results = cardArray.filter(function(elementCard) {
     return elementCard.importance === parseInt($('#filter').val());
