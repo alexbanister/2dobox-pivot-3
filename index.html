@@ -22,12 +22,25 @@
       </form>
     </section>
 
+    <section class="search-section">
+      <input class="search-input" type="text" placeholder="Search">
+    </section>
     <section class="filter-section">
-      <input class="filter-input" type="text" placeholder="Filter">
+      <form>
+        <label for="filter">Filter Importance: </label>
+        <select id="filter">
+          <option value=""></option>
+          <option value="0">None</option>
+          <option value="1">Low</option>
+          <option value="2">Normal</option>
+          <option value="3">High</option>
+          <option value="4">Critical</option>
+        </select>
+        <p class="clear-button">Clear Filter</p>
+      </form>
     </section>
 
     <section class="card-parent">
-
     </section>
 
       <article class="card" id="card-template">
