@@ -2,11 +2,13 @@ $(document).ready(displayFirstCards);
 $('.title-input, .task-input').keyup(disableSaveButton);
 $('.card-parent').on('click', '#delete', deleteCard);
 $('.save-btn').on('click', saveNewCard);
-$('.filter-input').on('keyup', filterCards);
+$('.search-input').on('keyup', searchCards);
 $('.card-parent').on('keydown', 'h2', updateCardInfo);
 $('.card-parent').on('keydown', '.task-text', updateCardInfo);
 $('.card-parent').on('click', '.ratings', changeImportance);
 $('.loadAll-section').on('click', displayAllCards);
+$('#filter').on('change', filterCards);
+$('.clear-button').on('click', clearFilter);
 
 function setLocalStorage(array) {
   localStorage.setItem('array', JSON.stringify(array));
@@ -120,7 +122,7 @@ function updateText(e) {
   setLocalStorage(cardArray);
 }
 
-function filterCards() {
+function searchCards() {
   var cardArray = retrieveLocalStorage();
   var results = cardArray.filter(function(elementCard) {
     return elementCard.title.toUpperCase().includes($('.filter-input').val().toUpperCase()) ||
@@ -130,6 +132,25 @@ function filterCards() {
   for (var i = 0; i < results.length; i++) {
     addCards(results[i]);
   }
+};
+
+function filterCards() {
+  $('.clear-button').show();
+  var cardArray = retrieveLocalStorage();
+  var results = cardArray.filter(function(elementCard) {
+    return elementCard.importance === parseInt($('#filter').val());
+  });
+  $('.card-parent').empty();
+  for (var i = 0; i < results.length; i++) {
+    addCards(results[i]);
+  }
+};
+
+function clearFilter() {
+  $('.clear-button').hide();
+  $('.card-parent').empty();
+  $('#filter').val('')
+  displayAllCards();
 };
 
 function addCards(buildCard) {
