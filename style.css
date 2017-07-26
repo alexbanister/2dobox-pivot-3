@@ -20,14 +20,26 @@ h1 {
 .do {
   color: #6d6e71;
 }
-.title-input, .task-input, .save-btn, .filter-input {
+.title-input, .task-input, .save-btn, .search-input, .filter-section {
   width: 66%;
   display: block;
   margin: auto;
   margin-bottom: 1em;
 }
 
-.filter-input, .title-input, .task-input {
+.clear-button {
+  display: none;
+  padding: .5em;
+  color: #ffffff;
+  margin: 1em 0;
+  background-color: #00a79d;
+}
+
+.filter-section {
+  text-align: center;
+}
+
+.search-input, .title-input, .task-input {
   border: 4px solid #d1d3d4;
   padding: .1em 0 .1em .25em;
   font-size: 1.75em;
@@ -71,7 +83,7 @@ h1 {
   outline-style: auto;
   outline-color: #00a79d;
 }
-.filter-input:focus {
+.search-input:focus {
   outline-style: auto;
   outline-color: #00a79d;
 }
@@ -91,7 +103,7 @@ h1 {
 .input-fields {
   padding-bottom: 1em;
 }
-.filter-section {
+.search-section {
   margin-top: 1.75em;
   margin-bottom: 1.75em;
 }
@@ -128,6 +140,8 @@ hr {
 .upvote-btn, .downvote-btn, .importance {
   display: inline-block;
 }
+
+
 
 .delete-btn {
   height: 1.5em;
@@ -178,7 +192,7 @@ h2, .ratings, .task-text {
     padding-top: 0;
     padding-bottom: 4em;
   }
-  .title-input, .task-input, .save-btn, .filter-input {
+  .title-input, .task-input, .save-btn, .search-input {
     width: 80%;
     margin-left: auto;
   }
