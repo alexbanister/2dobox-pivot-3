@@ -20,7 +20,7 @@ h1 {
 .do {
   color: #6d6e71;
 }
-.title-input, .task-input, .save-btn, .filter-input {
+.loadAll-section, .title-input, .task-input, .save-btn, .filter-input {
   width: 66%;
   display: block;
   margin: auto;
@@ -38,7 +38,13 @@ h1 {
   height: 2.5em;
   font-size: 1.25em;
 }
-
+.load-button {
+  padding: .5em;
+  color: #ffffff;
+  margin: 1em 0;
+  text-align: center;
+  background-color: #00a79d;
+}
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
   color: #d1d3d4;

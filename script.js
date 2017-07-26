@@ -6,6 +6,7 @@ $('.filter-input').on('keyup', filterCards);
 $('.card-parent').on('keydown', 'h2', updateCardInfo);
 $('.card-parent').on('keydown', '.task-text', updateCardInfo);
 $('.card-parent').on('click', '.ratings', changeImportance);
+$('.loadAll-section').on('click', displayAllCards);
 
 function setLocalStorage(array) {
   localStorage.setItem('array', JSON.stringify(array));
@@ -16,6 +17,7 @@ function retrieveLocalStorage() {
 };
 
 function displayAllCards() {
+  $('.loadAll-section').hide();
   $('.card-parent').empty();
   var cardArray = retrieveLocalStorage();
   cardArray.forEach(function(card) {
@@ -120,7 +122,6 @@ function updateText(e) {
 
 function filterCards() {
   var cardArray = retrieveLocalStorage();
-  console.log(cardArray);
   var results = cardArray.filter(function(elementCard) {
     return elementCard.title.toUpperCase().includes($('.filter-input').val().toUpperCase()) ||
            elementCard.task.toUpperCase().includes($('.filter-input').val().toUpperCase());
@@ -136,7 +137,6 @@ function addCards(buildCard) {
   template.attr('id', buildCard.id);
   template.find('h2').text(buildCard.title);
   template.find('.task-text').text(buildCard.task);
-  console.log(template);
   $('.card-parent').prepend(template);
   displayImportance(buildCard.id, getIndex(buildCard.id));
 };
