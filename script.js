@@ -1,4 +1,4 @@
-$(document).ready(displayAllCards);
+$(document).ready(displayFirstCards);
 $('.title-input, .task-input').keyup(disableSaveButton);
 $('.card-parent').on('click', '#delete', deleteCard);
 $('.save-btn').on('click', saveNewCard);
@@ -6,6 +6,7 @@ $('.search-input').on('keyup', searchCards);
 $('.card-parent').on('keydown', 'h2', updateCardInfo);
 $('.card-parent').on('keydown', '.task-text', updateCardInfo);
 $('.card-parent').on('click', '.ratings', changeImportance);
+$('.loadAll-section').on('click', displayAllCards);
 $('#filter').on('change', filterCards);
 $('.clear-button').on('click', clearFilter);
 
@@ -18,7 +19,17 @@ function retrieveLocalStorage() {
 };
 
 function displayAllCards() {
+  $('.loadAll-section').hide();
+  $('.card-parent').empty();
   var cardArray = retrieveLocalStorage();
+  cardArray.forEach(function(card) {
+    addCards(card);
+  })
+}
+
+function displayFirstCards() {
+  $('.card-parent').empty();
+  var cardArray = retrieveLocalStorage().slice(-10);
   cardArray.forEach(function(card) {
     addCards(card);
   })
