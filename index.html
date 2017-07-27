@@ -15,9 +15,9 @@
       <header>
         <h1>To<span class="do">Do</span></h1>
       </header>
-      <form class="input-fields">
-        <input class="title-input" type="text" placeholder="Title" />
-        <input class="task-input" type="text" placeholder="Task" />
+      <form class="input-fields" aria-label="Make a To Do list by adding tasks">
+        <input class="title-input" type="text" placeholder="Title" aria-label="Enter a title for a task" />
+        <input class="task-input" type="text" placeholder="Task"  aria-label="Describe the task"/>
         <input class="save-btn" type="submit" value="save" disabled />
       </form>
     </section>
@@ -27,7 +27,7 @@
     </section>
     <section class="filter-section">
       <form>
-        <label for="filter">Filter Importance:
+        <label for="filter-importance">Filter Importance:
         <select id="filter">
           <option value=""></option>
           <option value="0">None</option>
@@ -44,17 +44,17 @@
 
     <section class="card-parent">
     </section>
-    <section class="loadAll-section">
+    <section class="loadAll-section" role="button">
       <p class="load-button">Load All Taskes</p>
     </section>
 
       <article class="card" id="card-template">
         <h2 contenteditable="true"></h2>
-        <div class="delete-btn" id="delete"></div>
+        <div class="delete-btn" id="delete" role="button" aria-label="Delete"></div>
         <p class="task-text" contenteditable="true"></p>
         <div class="ratings">
-          <div class="upvote-btn" id="upvote"></div>
-          <div class="downvote-btn" id="downvote"></div>
+          <div class="upvote-btn" id="upvote" role="button" aria-label="Upvote"></div>
+          <div class="downvote-btn" id="downvote" role="button" aria-label="Downvote"></div>
           <p class="importance">Importance: <span class="new-importance"></span></p>
           <button class="complete-btn">Completed Task</button>
         </div>
